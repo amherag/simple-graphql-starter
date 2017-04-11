@@ -84,28 +84,6 @@ const resolverMap = {
                                                                    description: description,
                                                                    steps: steps,
                                                                    ingredients: ingredients});
-                                          
-
-                                          var options = {
-                                              url: 'https://www.googleapis.com/blogger/v3/blogs/blogId/posts/',
-                                              method: 'POST',
-                                              headers: {
-                                                  'Content-Type': 'application/json',
-                                                  'Authorization': google_api_key
-                                              },
-                                              form: {'kind': 'blogger#post',
-                                                     'blog': {
-                                                         'id': '8498699767629793301',
-                                                     },
-                                                     'title': title,
-                                                     'content': `Description: ${description}
-Steps: ${steps}
-Ingredients: ${ingredients}`}
-                                          };
-                                          
-                                          rp(options).then(function (body) {
-                                              console.log(body);
-                                          });
                                           return recipe.save();
                                       });
             
