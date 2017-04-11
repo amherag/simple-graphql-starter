@@ -1,0 +1,73 @@
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  firstname: String
+  lastname: String
+  recipes: [Recipe]
+}
+
+input UserInput {
+  username: String!
+  password: String!
+}
+
+type Recipe {
+  id: ID!
+  author: User
+  title: String!
+  description: String
+  steps: [String]
+  ingredients: [Ingredient]
+}
+
+type Ingredient {
+  description: String!
+  calories: Int
+  totalfat: Float
+  sugars: Float
+  serving: String
+  
+}
+
+type Query {
+  users: [User]
+  user(username: String!): User
+  recipes: [Recipe]
+  ingredient (
+    description: String
+  ): Ingredient
+}
+
+type Mutation {
+  createUser (
+    username: String!
+    password: String!
+    firstname: String
+    lastname: String
+  ): User
+  updateUser (
+    username: String!
+    password: String!
+    firstname: String!
+    lastname: String!
+  ): User
+  deleteUser (
+    username: String!
+    password: String!
+  ): User
+  createRecipe(
+    author: UserInput
+    title: String!
+    description: String
+    steps: [String]!
+    ingredients: [String]!
+  ): Recipe
+}
+
+# we need to tell the server which types represent the root query
+# and root mutation types. We call them RootQuery and RootMutation by convention.
+schema {
+  query: Query
+  mutation: Mutation
+}
