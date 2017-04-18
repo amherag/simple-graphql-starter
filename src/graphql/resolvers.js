@@ -38,7 +38,7 @@ function getIngredient(description) {
         if (ingredients.length == 1)
             return ingredients[0];
         else
-            return ingredients
+            return ingredients;
     });
 }
 
@@ -190,6 +190,8 @@ const resolverMap = {
                 .catch(function(error) {
                     console.error(error);
                 });
+
+            return `Recipe ${recipe.title} was uploaded to Dropbox!`;
         },
         likeRecipe(recipe, {token}) {
             var payload = jwt.verify(token, secret_key);
