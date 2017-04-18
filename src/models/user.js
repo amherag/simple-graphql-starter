@@ -14,7 +14,8 @@ var userSchema = new mongoose.Schema({
     },
     lastname: {
         type: String
-    }
+    },
+    likedRecipes: [{type : mongoose.Schema.ObjectId, ref : 'Recipe'}],
 });
 
 export default mongoose.model('User', userSchema);

@@ -27,6 +27,11 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
+app.use('/login', graphqlHTTP({
+    schema: MySchema,
+    graphiql: true
+}));
+
 mongoose.connect('mongodb://localhost/recipex');
 
 app.listen(PORT, () => {

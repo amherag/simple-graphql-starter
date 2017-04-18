@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 var recipeSchema = new mongoose.Schema({
     author: {type : mongoose.Schema.ObjectId, ref : 'User'},
+    likedBy: [{type : mongoose.Schema.ObjectId, ref : 'User'}],
     title: {
         type: String,
         default: 'New Recipe',

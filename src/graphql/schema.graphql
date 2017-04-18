@@ -5,20 +5,21 @@ type User {
   firstname: String
   lastname: String
   recipes: [Recipe]
-}
-
-input UserInput {
-  username: String!
-  password: String!
+  likedRecipes: [Recipe]
 }
 
 type Recipe {
   id: ID!
   author: User
+  likedBy: [User]
   title: String!
   description: String
   steps: [String]
   ingredients: [Ingredient]
+  likeRecipe(
+    token: String!
+  ): Recipe
+  uploadRecipe: String
 }
 
 type Ingredient {
@@ -30,13 +31,19 @@ type Ingredient {
   
 }
 
+type Token {
+  token: String!
+}
+
 type Query {
   users: [User]
-  user(username: String!): User
+  user(token: String!): User
   recipes: [Recipe]
+  recipe(title: String!): Recipe
   ingredient (
     description: String
   ): Ingredient
+  loginurl: String
 }
 
 type Mutation {
@@ -46,6 +53,10 @@ type Mutation {
     firstname: String
     lastname: String
   ): User
+  loginUser (
+    username: String!
+    password: String!
+  ): Token
   updateUser (
     username: String!
     password: String!
@@ -57,12 +68,12 @@ type Mutation {
     password: String!
   ): User
   createRecipe(
-    author: UserInput
+    token: String!
     title: String!
     description: String
     steps: [String]!
     ingredients: [String]!
-  ): Recipe
+  ): String
 }
 
 # we need to tell the server which types represent the root query
